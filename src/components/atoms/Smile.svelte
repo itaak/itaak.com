@@ -22,25 +22,11 @@
 
     let x = baseX;
     let y = baseY;
-    let lastGamma = 0;
-
-    // Introduire une vitesse maximale de changement pour gamma
-    let gammaSpeed = 1;
 
     $: {
         // Obtenir les valeurs d'orientation
         const beta = $deviceOrientation.beta ?? 0;
-        let gamma = $deviceOrientation.gamma ?? 0;
-
-        // Calculer la différence entre 'lastGamma' et 'gamma'
-        const difference = gamma - lastGamma;
-
-        // Si la différence est trop grande, réduire la taille du pas
-        if (Math.abs(difference) > gammaSpeed) {
-            gamma = lastGamma + Math.sign(difference) * gammaSpeed;
-        }
-
-        lastGamma = gamma;
+        const gamma = $deviceOrientation.gamma ?? 0;
 
         // Normaliser beta et gamma autour des valeurs de repos
         const normalizedBeta = (beta - restBeta) / (betaRange / 2);
