@@ -17,47 +17,21 @@
     const restBeta = 15;
     const restGamma = 0;
 
-    const minX = 0;
-    const minY = 39;
-    const maxX = 58;
-    const maxY = 59;
-
     let x = baseX;
     let y = baseY;
-
-    function normalizeBeta(beta: number): number {
-        return (beta - restBeta) / (betaRange / 2);
-    }
-
-    function normalizeGamma(gamma: number): number {
-        return (gamma - restGamma) / gammaRange;
-    }
-
-    function calculateEyeCoordinates(
-        normalizedBeta: number,
-        normalizedGamma: number,
-    ): [number, number] {
-        const x = baseX + normalizedGamma * (maxX - baseX);
-        const y = baseY - normalizedBeta * baseY;
-        return [x, y];
-    }
-
-    function keepInsideFace([x, y]: [number, number]): [number, number] {
-        const safeX = Math.max(minX, Math.min(x, maxX));
-        const safeY = Math.max(minY, Math.min(y, maxY));
-        return [safeX, safeY];
-    }
 
     $: {
         const beta = $deviceOrientation.beta ?? 0;
         const gamma = $deviceOrientation.gamma ?? 0;
 
-        const normalizedBeta = normalizeBeta(beta);
-        const normalizedGamma = normalizeGamma(gamma);
+        const normalizedBeta = (beta - restBeta) / (betaRange / 2);
+        const normalizedGamma = (gamma - restGamma) / gammaRange;
 
-        [x, y] = calculateEyeCoordinates(normalizedBeta, normalizedGamma);
+        x = baseX + normalizedGamma * (58 - baseX);
+        y = baseY - normalizedBeta * baseY;
 
-        [x, y] = keepInsideFace([x, y]);
+        x = Math.max(0, Math.min(x, 58));
+        y = Math.max(39, Math.min(y, 59));
     }
 </script>
 
