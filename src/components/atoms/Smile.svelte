@@ -17,7 +17,7 @@
     const gammaRange = 50;
 
     // Définir le point de repos pour beta et gamma
-    const restBeta = 0;
+    const restBeta = 30;
     const restGamma = 0;
 
     let x = baseX;
