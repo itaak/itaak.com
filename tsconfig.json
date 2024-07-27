@@ -1,0 +1,39 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "verbatimModuleSyntax": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@atoms/*": [
+        "./src/components/atoms/*"
+      ],
+      "@molecules/*": [
+        "./src/components/molecules/*"
+      ],
+      "@organisms/*": [
+        "./src/components/organisms/*"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@types/*": [
+        "src/types/*"
+      ],
+      "@i18n/*": [
+        "src/i18n/*"
+      ],
+      "@pages/*": [
+        "src/pages/*"
+      ],
+      "@layouts/*": [
+        "src/layouts/*"
+      ],
+      "@store/*": [
+        "src/store/*"
+      ],
+    }
+  }
+}

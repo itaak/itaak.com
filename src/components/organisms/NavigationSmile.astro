@@ -1,0 +1,55 @@
+---
+import Navbar from "@organisms/Navbar.astro";
+import Footer from "@organisms/Footer.astro";
+import Link from "@atoms/Link.astro";
+import Smile from "@atoms/Smile.svelte";
+import DeviceMotion from "../atoms/DeviceMotion.svelte";
+import {
+    getLangFromUrl,
+    useTranslations,
+    useTranslatedPath,
+} from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+interface Props {
+    withoutLinks?: boolean;
+}
+
+const { withoutLinks = false } = Astro.props;
+---
+
+<div>
+    <Navbar>
+        {
+            !withoutLinks ? null : (
+                <>
+                    <Link name="About" href={translatePath("/about/")} />
+                </>
+            )
+        }
+    </Navbar>
+
+    <div class="smile">
+        <Smile client:only="svelte" />
+    </div>
+
+    <DeviceMotion client:only="svelte" />
+
+    <Footer />
+</div>
+
+<style lang="scss" scoped>
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100%;
+
+        .smile {
+            align-items: center;
+        }
+    }
+</style>

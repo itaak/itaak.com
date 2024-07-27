@@ -1,0 +1,37 @@
+---
+import SwitchTheme from "@atoms/SwitchTheme.svelte";
+import LanguagePicker from "@/components/atoms/LanguagePicker.svelte";
+
+import Logo from "@atoms/Logo.astro";
+import Label from "@atoms/Label.svelte";
+
+const newDate = new Date();
+const year = newDate.getFullYear();
+const month = newDate.getMonth() + 1;
+
+const date = `${month.toString().padStart(2, "0")}/${year}`;
+---
+
+<footer>
+    <div>
+        <SwitchTheme client:only="svelte" />
+        <LanguagePicker client:only="svelte" />
+    </div>
+    <div>
+        <Logo />
+        <Label title={"Available " + date} />
+    </div>
+</footer>
+
+<style lang="scss">
+    footer {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        div {
+            display: flex;
+            gap: 16px;
+        }
+    }
+</style>

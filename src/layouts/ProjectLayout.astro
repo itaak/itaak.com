@@ -1,0 +1,65 @@
+---
+import Layout from "@layouts/Layout.astro";
+import type { ProjectType } from "@/types/project";
+import Label from "@atoms/Label.svelte";
+
+type Props = ProjectType;
+
+const { title, slug, customer, theme, tags } = Astro.props;
+
+const selectedTheme =
+    theme.length > 0 ? theme[0] : { colorBody: "#fff", color: "#000" };
+---
+
+<Layout title={title} theme={selectedTheme}>
+    <main style={`--text-color: ${selectedTheme.color};`}>
+        <section class="content">
+            <Label title={customer} theme="dark" />
+            <p>
+                Par son action, la distillerie Saint-Hilaire participe ainsi au
+                développement local en confiant à des producteurs de proximité
+                la culture et la cueillette des plantes médicinales et
+                aromatiques.
+            </p>
+            <div class="tags">
+                {tags.map((tag) => <Label title={tag} />)}
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style lang="scss" scoped>
+    html {
+        overflow: hidden;
+    }
+
+    main {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-template-rows: 1fr;
+        align-items: center;
+        position: fixed;
+        margin: inherit;
+        top: 0;
+        left: 0;
+        bottom: 0;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        grid-column: 4 / 7;
+    }
+
+    p {
+        color: var(--text-color);
+    }
+
+    .tags {
+        display: flex;
+        gap: 4px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+</style>

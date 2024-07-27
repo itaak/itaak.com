@@ -1,0 +1,45 @@
+// | -------------------------------------------------------------
+// | Font
+// | -------------------------------------------------------------
+
+@use './colors' as *;
+@use './size' as size;
+
+//Fontsize
+
+@font-face {
+  font-family: 'SuisseIntl-Regular';
+  src: local('SuisseIntl-Regular'), local('SuisseIntl-Regular'), url('/fonts/SuisseIntl-Regular.ttf') format('truetype');
+  font-style: normal;
+}
+
+@mixin text {
+  font-family: 'SuisseIntl-Regular';
+  font-size: clamp(14px, size.vw(14px), size.rem(16px));
+  font-style: normal;
+  font-weight: 400;
+  line-height: size.lh(14, 16);
+  color: $primary;
+}
+
+@mixin small-text {
+  font-family: 'SuisseIntl-Regular';
+  font-size: clamp(12px, size.vw(12px), size.rem(14px));
+  font-style: normal;
+  font-weight: 400;
+  line-height: size.lh(12px, 12px);
+  color: $primary;
+}
+
+@mixin title {
+  font-family: 'SuisseIntl-Regular';
+  font-size: clamp(32px, size.vw(32px), size.rem(40px));
+  font-style: normal;
+  font-weight: 400;
+  line-height: size.lh(32px, 32px);
+  color: $primary;
+}
+
+.title {
+  @include title;
+}

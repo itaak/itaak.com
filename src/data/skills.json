@@ -1,0 +1,50 @@
+{
+    "skills": [
+      {
+        "name": "ecommerce",
+        "tags": [
+          "Sylius",
+          "Prestashop",
+          "Prestashop"
+        ]
+      },
+      {
+        "name": "frameworks",
+        "tags": [
+          "Symfony",
+          "React",
+          "Vue",
+          "NextJS",
+          "AstroJS",
+          "Svelte"
+        ]
+      },
+      {
+        "name": "headless-cms",
+        "tags": [
+          "Strapi",
+          "Directus"
+        ]
+      },
+      {
+        "name": "languages",
+        "tags": [
+          "PHP",
+          "Html",
+          "Css",
+          "Sass",
+          "JavaScript",
+          "TypeScript",
+          "Golang",
+          "Python",
+          "SQL"
+        ]
+      },
+      {
+        "name": "tools",
+        "tags": [
+          "Docker"
+        ]
+      }
+    ]
+  }

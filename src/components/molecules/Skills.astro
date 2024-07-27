@@ -1,0 +1,16 @@
+---
+import { skills } from "@/data/skills.json";
+---
+
+<ul>
+    {
+        skills.map((skill) => (
+            <li class="list">
+                <span>{skill.name}</span>
+                <div>
+                    <span>{skill.tags.join(", ")}</span>
+                </div>
+            </li>
+        ))
+    }
+</ul>

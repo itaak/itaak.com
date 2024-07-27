@@ -1,0 +1,35 @@
+---
+import { LOCALES, getLocaleFromSlug } from '@i18n/index';
+import { getCollection } from 'astro:content';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import ProjectLayout from '@layouts/ProjectLayout.astro';
+
+export async function getStaticPaths() {
+    const collection = 'projects'
+    const projects = await getCollection(collection);
+
+    let projectRender = [];
+
+    for (let locale of Object.values(LOCALES)) {
+        const localProjects = projects.filter(entry => getLocaleFromSlug(entry.slug) === locale);
+
+        const localProjectPaths = localProjects.map(arr => {
+            return arr.data.projects.map(p => ({
+                params: {
+                    project: getRelativeLocaleUrl(locale, `${collection}/${p.slug}`),
+                },
+                props: p,
+            }));
+        });
+
+        projectRender.push(...localProjectPaths.flat());
+    }
+    return projectRender;
+}
+
+const project = Astro.props;
+---
+
+<ProjectLayout {...project}>
+
+</ProjectLayout>

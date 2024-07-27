@@ -1,0 +1,19 @@
+[
+    {"timeZone": "Africa/Abidjan", "code": "GMT"},
+    {"timeZone": "Africa/Dakar", "code": "GMT"},
+    {"timeZone": "Africa/Kinshasa", "code": "WAT"},
+    {"timeZone": "America/Anchorage", "code": "AKST"},
+    {"timeZone": "America/Chicago", "code": "CST"},
+    {"timeZone": "America/Denver", "code": "MST"},
+    {"timeZone": "America/Guadeloupe", "code": "AST"},
+    {"timeZone": "America/Los_Angeles", "code": "PST"},
+    {"timeZone": "America/Martinique", "code": "AST"},
+    {"timeZone": "America/New_York", "code": "EST"},
+    {"timeZone": "Europe/Brussels", "code": "CET"},
+    {"timeZone": "Europe/Paris", "code": "CET"},
+    {"timeZone": "Europe/Zurich", "code": "CET"},
+    {"timeZone": "Indian/Mayotte", "code": "EAT"},
+    {"timeZone": "Indian/Reunion", "code": "RET"},
+    {"timeZone": "Pacific/Honolulu", "code": "HST"},
+    {"timeZone": "Pacific/Noumea", "code": "NCT"}
+]

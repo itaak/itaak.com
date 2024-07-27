@@ -1,0 +1,18 @@
+---
+import { socials } from "@/data/socials.json";
+---
+
+<ul class="list">
+    <span>Socials</span>
+    <div>
+        {
+            socials.map((social) => (
+                <li>
+                    <a href={social.url} target="_blank">
+                        ( {social.name} )
+                    </a>
+                </li>
+            ))
+        }
+    </div>
+</ul>

@@ -1,0 +1,59 @@
+// | -------------------------------------------------------------
+// | Globals
+// | -------------------------------------------------------------
+
+@use 'base/colors' as *;
+@use 'base/size' as size;
+@use 'base/font' as *;
+@use 'base/space' as space;
+@use 'base/themes' as *;
+
+html {
+    @include text;
+    cursor: url('../img/cursor.svg'), pointer !important;
+    filter: var(--filter);
+
+    body {
+        margin: space.$default;
+        min-height: 100vh;
+    }
+}
+
+button,
+a {
+    cursor: url('../img/cursor.svg'), pointer !important;
+    @include text;
+}
+
+a {
+    @include text;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    padding: 0;
+}
+
+main {
+    display: grid;
+    //grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: space.$default;
+    grid-row-gap: 0px;
+}
+
+.list {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    justify-content: space-between;
+}

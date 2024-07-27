@@ -1,0 +1,39 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { useLanguage } from "../i18n/utils";
+import { getCollection } from "astro:content";
+import ProjectsGrid from "@molecules/ProjectsGrid.svelte";
+import NavigationSmile from "@organisms/NavigationSmile.astro";
+
+const { lang } = useLanguage(Astro.url);
+
+const projects = await getCollection("projects", ({ data, id }) => {
+    if (id.startsWith(lang + "/")) {
+        return data;
+    }
+});
+---
+
+<Layout title="Studio Itaak">
+    <main>
+        <section class="left">
+            <NavigationSmile withoutLinks={true} />
+        </section>
+    </main>
+</Layout>
+
+<style lang="scss" scoped>
+    @use "@/assets/scss/base/space" as space;
+
+    html {
+        overflow: hidden;
+    }
+
+    main {
+        position: fixed;
+        margin: inherit;
+        top: 0;
+        left: 0;
+        bottom: 0;
+    }
+</style>

@@ -1,0 +1,39 @@
+---
+import "@assets/scss/globals.scss";
+import "../components/organisms/Navbar.astro";
+import { useLanguage } from "../i18n/utils";
+import Theme from "@/components/Theme.svelte";
+import type { ThemeType } from "@/types/theme";
+
+interface Props {
+    title: string;
+    theme: ThemeType | null;
+}
+
+const { title, theme } = Astro.props;
+const { lang } = useLanguage(Astro.url);
+
+const defaultTheme: ThemeType = {
+    colorBody: "",
+    color: "",
+};
+
+const activeTheme = theme || defaultTheme;
+---
+
+<!doctype html>
+<html lang={lang}>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Studio Itaak" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+        <slot name="head" />
+    </head>
+    <body style={`background-color: ${activeTheme.colorBody};`}>
+        <Theme client:only="svelte" />
+        <slot />
+    </body>
+</html>

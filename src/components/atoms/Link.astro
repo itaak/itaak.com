@@ -1,0 +1,20 @@
+---
+interface Props {
+    name: string;
+    href: string;
+    className?: string;
+}
+
+const { name, href, className } = Astro.props;
+---
+
+<a class={className} href={href}>( {name} )</a>
+
+<style lang="scss" scoped>
+    @use "@assets/scss/base/space" as space;
+
+    .close {
+        position: fixed;
+        right: space.$default;
+    }
+</style>

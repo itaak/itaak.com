@@ -1,0 +1,70 @@
+---
+import Layout from "../layouts/Layout.astro";
+import NavigationSmile from "@organisms/NavigationSmile.astro";
+import Link from "@atoms/Link.astro";
+import Skills from "@molecules/Skills.astro";
+import Clock from "@atoms/Clock.svelte";
+import Socials from "@molecules/Socials.astro";
+import { useTranslatedPath, useLanguage } from "@/i18n/utils";
+
+const { t, lang } = useLanguage(Astro.url);
+const translatePath = useTranslatedPath(lang);
+---
+
+<Layout title="Studio Itaak ( About )">
+    <main>
+        <section class="left">
+            <NavigationSmile />
+        </section>
+        <section class="about">
+            <Link name="Close" href={translatePath("/")} className="close" />
+            <div class="content">
+                <div>
+                    <Clock client:only="svelte" />
+                    <h1 class="title">
+                        {t("about.title")}
+                    </h1>
+                    <p>
+                        {t("about.resume")}
+                    </p>
+                </div>
+                <Skills />
+                <h2 class="title">
+                    Toray Industries, Feel Mining, Jeuchange, Laboratoire
+                    Phytema, Distillerie Saint-Hilaire, CHU Annecy, Culture LSF,
+                    Tefal...
+                </h2>
+                <Socials />
+                <div class="list">
+                    <span>Typography</span>
+                    <span>( Suisse Intl )</span>
+                </div>
+                <span>©2024</span>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style lang="scss" scoped>
+    @use "@assets/scss/base/space" as space;
+
+    .left {
+        position: sticky;
+        top: space.$default;
+        max-height: calc(100vh - space.$default * 2);
+        overflow: auto;
+    }
+
+    .about {
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            padding-top: 15vh;
+
+            p {
+                width: 50%;
+            }
+        }
+    }
+</style>

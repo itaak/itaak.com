@@ -1,0 +1,69 @@
+@use "sass:math";
+
+// Default Screen width in pixels
+$defaultScreenWidth: 1440;
+
+// Function to strip unit from a value
+@function strip-unit($value) {
+    @return math.div($value, $value * 0 + 1);
+}
+
+// Function to calculate size based on default screen width
+@function size($num){
+    @return round(math.div($num, $defaultScreenWidth) * 100);
+}
+
+// Function to convert pixel values to vw units
+@function vw($pixelValue) {
+    $pixelValue: strip-unit($pixelValue);
+    $vwValue: math.div($pixelValue, $defaultScreenWidth) * 100;
+    @return #{$vwValue}vw;
+}
+
+// Function to convert pixel values to rem units
+@function rem($pixelValue) {
+    $pixelValue: strip-unit($pixelValue);
+    $remValue: math.div($pixelValue, 16);
+    @return #{$remValue}rem;
+}
+
+// Function to convert pixel values to em units
+@function em($pixelValue) {
+    $pixelValue: strip-unit($pixelValue);
+    $emValue: math.div($pixelValue, 16);
+    @return #{$emValue}em;
+}
+
+// Function to calculate line height based on font size
+@function lh($fontSize, $lineHeight) {
+    $lineHeight: strip-unit($lineHeight);
+    $fontSize: strip-unit($fontSize);
+
+    $lineHeightPercentage: math.div($lineHeight, $fontSize);
+    @return #{$lineHeightPercentage};
+}
+
+// Media query mixins for different device sizes
+@mixin phone {
+    @media (max-width: 576px) { @content; }
+}
+
+@mixin tablet {
+    @media (max-width: 768px) { @content; }
+}
+
+@mixin laptop {
+    @media (max-width: 992px) { @content; }
+}
+
+@mixin desktop {
+    @media (max-width: 1200px) { @content; }
+}
+
+@mixin desktop-md {
+    @media (max-width: 1999px) { @content; }
+}
+
+@mixin desktop-lg {
+    @media (min-width: 2000px) { @content; }
+}
