@@ -8,13 +8,17 @@
     $: widthScreen = $screenSize.width;
     $: heightScreen = $screenSize.height;
 
-    // Définir les coordonnées de base quand beta=0, gamma=0
+    // Définir les coordonnées de base quand beta ≈ 30°, gamma ≈ 0°
     const baseX = 29; // Position centrale en x
     const baseY = 49; // Position centrale en y
 
     // Définir les plages des valeurs d'orientation
     const betaRange = 180; // Plage totale pour beta (de -90 à +90)
     const gammaRange = 50; // Plage totale pour gamma (de -50 à +50)
+
+    // Définir le point de repos pour beta et gamma
+    const restBeta = 30; // Angle autour duquel les yeux sont centrés
+    const restGamma = 0; // Gamma est à 0 pour le centrage horizontal
 
     let x = baseX;
     let y = baseY;
@@ -24,9 +28,9 @@
         const beta = $deviceOrientation.beta ?? 0;
         const gamma = $deviceOrientation.gamma ?? 0;
 
-        // Normaliser beta et gamma autour de 0
-        const normalizedBeta = beta / (betaRange / 2); // Normalisation de beta autour de 0, plage -90 à 90
-        const normalizedGamma = gamma / gammaRange; // Normalisation de gamma autour de 0, plage -50 à 50
+        // Normaliser beta et gamma autour des valeurs de repos
+        const normalizedBeta = (beta - restBeta) / (betaRange / 2); // Normalisation autour de 30°, plage -90 à 90
+        const normalizedGamma = (gamma - restGamma) / gammaRange; // Normalisation de gamma autour de 0, plage -50 à 50
 
         // Calculer les coordonnées des yeux
         x = baseX + normalizedGamma * (58 - baseX); // Plage x : de 0 à 58
