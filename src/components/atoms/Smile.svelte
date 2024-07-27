@@ -8,9 +8,9 @@
     $: widthScreen = $screenSize.width;
     $: heightScreen = $screenSize.height;
 
-    // Définir les coordonnées de base quand alpha=0, beta=90, gamma=0
-    const baseX = 29;
-    const baseY = 49;
+    // Définir les coordonnées de base quand beta=0, gamma=0
+    const baseX = 29; // Position centrale en x
+    const baseY = 49; // Position centrale en y
 
     // Définir les plages des valeurs d'orientation
     const betaRange = 180; // Plage totale pour beta (de -90 à +90)
@@ -24,17 +24,17 @@
         const beta = $deviceOrientation.beta ?? 0;
         const gamma = $deviceOrientation.gamma ?? 0;
 
-        // Normaliser beta et gamma
-        const normalizedBeta = (beta - 90) / (betaRange / 2); // Normalisation autour de 90°, plage -90 à 90
-        const normalizedGamma = gamma / gammaRange; // Normalisation de gamma, plage -50 à 50
+        // Normaliser beta et gamma autour de 0
+        const normalizedBeta = beta / (betaRange / 2); // Normalisation de beta autour de 0, plage -90 à 90
+        const normalizedGamma = gamma / gammaRange; // Normalisation de gamma autour de 0, plage -50 à 50
 
         // Calculer les coordonnées des yeux
         x = baseX + normalizedGamma * (58 - baseX); // Plage x : de 0 à 58
-        y = baseY - normalizedBeta * (49 - 0); // Plage y : de 0 à 49 (à ajuster en fonction du bonhomme)
+        y = baseY - normalizedBeta * baseY; // Plage y : de 0 à 49
 
         // S'assurer que les yeux restent à l'intérieur du bonhomme
-        x = Math.max(0, Math.min(x, 58)); // Ajuster ces valeurs selon les limites du bonhomme
-        y = Math.max(0, Math.min(y, 98)); // Ajuster ces valeurs selon les limites du bonhomme
+        x = Math.max(0, Math.min(x, 58)); // Limiter x aux bornes du bonhomme
+        y = Math.max(0, Math.min(y, 98)); // Limiter y aux bornes du bonhomme
     }
 </script>
 
