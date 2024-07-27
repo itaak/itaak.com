@@ -17,16 +17,24 @@
     const gammaRange = 50;
 
     // Définir le point de repos pour beta et gamma
-    const restBeta = 30;
+    const restBeta = 15;
     const restGamma = 0;
 
     let x = baseX;
     let y = baseY;
+    let lastGamma = 0;
 
     $: {
         // Obtenir les valeurs d'orientation
         const beta = $deviceOrientation.beta ?? 0;
-        const gamma = $deviceOrientation.gamma ?? 0;
+        let gamma = $deviceOrientation.gamma ?? 0;
+
+        // Si le changement dans 'gamma' est trop grand, ignorer la nouvelle valeur
+        if (Math.abs(lastGamma - gamma) > 90) {
+            gamma = lastGamma;
+        } else {
+            lastGamma = gamma;
+        }
 
         // Normaliser beta et gamma autour des valeurs de repos
         const normalizedBeta = (beta - restBeta) / (betaRange / 2);
