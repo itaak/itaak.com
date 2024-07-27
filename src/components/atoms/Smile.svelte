@@ -38,7 +38,7 @@
 
         // S'assurer que les yeux restent à l'intérieur du bonhomme
         x = Math.max(0, Math.min(x, 58));
-        y = Math.max(0, Math.min(y, 98));
+        y = Math.max(39, Math.min(y, 59));
     }
 </script>
 
