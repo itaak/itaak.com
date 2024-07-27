@@ -24,17 +24,23 @@
     let y = baseY;
     let lastGamma = 0;
 
+    // Introduire une vitesse maximale de changement pour gamma
+    let gammaSpeed = 1;
+
     $: {
         // Obtenir les valeurs d'orientation
         const beta = $deviceOrientation.beta ?? 0;
         let gamma = $deviceOrientation.gamma ?? 0;
 
-        // Si le changement dans 'gamma' est trop grand, ignorer la nouvelle valeur
-        if (Math.abs(lastGamma - gamma) > 90) {
-            gamma = lastGamma;
-        } else {
-            lastGamma = gamma;
+        // Calculer la différence entre 'lastGamma' et 'gamma'
+        const difference = gamma - lastGamma;
+
+        // Si la différence est trop grande, réduire la taille du pas
+        if (Math.abs(difference) > gammaSpeed) {
+            gamma = lastGamma + Math.sign(difference) * gammaSpeed;
         }
+
+        lastGamma = gamma;
 
         // Normaliser beta et gamma autour des valeurs de repos
         const normalizedBeta = (beta - restBeta) / (betaRange / 2);
@@ -44,7 +50,7 @@
         x = baseX + normalizedGamma * (58 - baseX);
         y = baseY - normalizedBeta * baseY;
 
-        // S'assurer que les yeux restent à l'intérieur du bonhomme
+        // S'assurer que les yeux restent à l'intérieur du visage
         x = Math.max(0, Math.min(x, 58));
         y = Math.max(39, Math.min(y, 59));
     }
