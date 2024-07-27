@@ -8,37 +8,56 @@
     $: widthScreen = $screenSize.width;
     $: heightScreen = $screenSize.height;
 
-    // Définir les coordonnées de base quand beta ≈ 30°, gamma ≈ 0°
     const baseX = 29;
     const baseY = 49;
 
-    // Définir les plages des valeurs d'orientation
     const betaRange = 180;
     const gammaRange = 50;
 
-    // Définir le point de repos pour beta et gamma
     const restBeta = 15;
     const restGamma = 0;
+
+    const minX = 0;
+    const minY = 39;
+    const maxX = 58;
+    const maxY = 59;
 
     let x = baseX;
     let y = baseY;
 
+    function normalizeBeta(beta: number): number {
+        return (beta - restBeta) / (betaRange / 2);
+    }
+
+    function normalizeGamma(gamma: number): number {
+        return (gamma - restGamma) / gammaRange;
+    }
+
+    function calculateEyeCoordinates(
+        normalizedBeta: number,
+        normalizedGamma: number,
+    ): [number, number] {
+        const x = baseX + normalizedGamma * (maxX - baseX);
+        const y = baseY - normalizedBeta * baseY;
+        return [x, y];
+    }
+
+    function keepInsideFace([x, y]: [number, number]): [number, number] {
+        const safeX = Math.max(minX, Math.min(x, maxX));
+        const safeY = Math.max(minY, Math.min(y, maxY));
+        return [safeX, safeY];
+    }
+
     $: {
-        // Obtenir les valeurs d'orientation
         const beta = $deviceOrientation.beta ?? 0;
         const gamma = $deviceOrientation.gamma ?? 0;
 
-        // Normaliser beta et gamma autour des valeurs de repos
-        const normalizedBeta = (beta - restBeta) / (betaRange / 2);
-        const normalizedGamma = (gamma - restGamma) / gammaRange;
+        const normalizedBeta = normalizeBeta(beta);
+        const normalizedGamma = normalizeGamma(gamma);
 
-        // Calculer les coordonnées des yeux
-        x = baseX + normalizedGamma * (58 - baseX);
-        y = baseY - normalizedBeta * baseY;
+        [x, y] = calculateEyeCoordinates(normalizedBeta, normalizedGamma);
 
-        // S'assurer que les yeux restent à l'intérieur du visage
-        x = Math.max(0, Math.min(x, 58));
-        y = Math.max(39, Math.min(y, 59));
+        [x, y] = keepInsideFace([x, y]);
     }
 </script>
 
