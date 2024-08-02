@@ -5,31 +5,31 @@
         screenSize,
     } from "@assets/js/common";
 
-    $: widthScreen = $screenSize.width;
-    $: heightScreen = $screenSize.height;
-
     const baseX = 29;
     const baseY = 49;
-
-    const gammaRange = 50;
-
-    const restGamma = 0;
+    const maxX = 58;
+    const maxY = 98;
 
     let x = baseX;
     let y = baseY;
 
     $: {
-        const gamma = $deviceOrientation.gamma ?? 0;
-        const normalizedGamma = (gamma - restGamma) / gammaRange;
-        x = baseX + normalizedGamma * (58 - baseX);
-        x = Math.max(0, Math.min(x, 58));
+        const { width: widthScreen, height: heightScreen } = $screenSize;
+        const gamma = $deviceOrientation.gamma;
+
+        if (gamma != null) {
+            const gammaRange = 50;
+            const restGamma = 0;
+            x = baseX + ((gamma - restGamma) / gammaRange) * (maxX - baseX);
+        } else {
+            x = ($mousePosition.x * maxX) / widthScreen;
+            y = ($mousePosition.y * maxY) / heightScreen;
+        }
+
+        x = Math.max(0, Math.min(x, maxX));
+        y = Math.max(0, Math.min(y, maxY));
     }
 </script>
-
-<div>
-    x:{$mousePosition.x}
-    y:{$mousePosition.y}
-</div>
 
 <svg
     width="140"

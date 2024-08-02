@@ -20,17 +20,17 @@ export const mousePosition = readable<MousePosition>({ x: 0, y: 0 }, (set) => {
 // DeviceOrientation
 
 interface DeviceOrientation {
-  alpha: number;
-  beta: number;
-  gamma: number;
+  alpha: any;
+  beta: any;
+  gamma: any;
 }
 
-export const deviceOrientation = readable<DeviceOrientation>({ alpha: 0, beta: 0, gamma: 0 }, (set) => {
+export const deviceOrientation = readable<DeviceOrientation>({ alpha: null, beta: null, gamma: null }, (set) => {
   const orientation = (event: DeviceOrientationEvent) => {
     set({
-      alpha: event.alpha ?? 0,
-      beta: event.beta ?? 0,
-      gamma: event.gamma ?? 0
+      alpha: event.alpha,
+      beta: event.beta,
+      gamma: event.gamma
     });
   };
 
@@ -40,6 +40,7 @@ export const deviceOrientation = readable<DeviceOrientation>({ alpha: 0, beta: 0
     window.removeEventListener('deviceorientation', orientation);
   };
 });
+
 
 // ScreenSize
 
