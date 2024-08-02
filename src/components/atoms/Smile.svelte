@@ -23,7 +23,7 @@
     $: {
         const beta = $deviceOrientation.beta ?? 0;
         const gamma = $deviceOrientation.gamma ?? 0;
-        let restBeta = beta / 2;
+        let restBeta = beta;
 
         const normalizedBeta = (beta - restBeta) / (betaRange / 2);
         const normalizedGamma = (gamma - restGamma) / gammaRange;
