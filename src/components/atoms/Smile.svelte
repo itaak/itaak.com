@@ -20,6 +20,7 @@
         if (gamma != null) {
             const normalizedGamma = gamma / maxX;
             x = baseX + normalizedGamma * (maxX - baseX);
+            y = baseY;
         } else {
             x = ($mousePosition.x * maxX) / widthScreen;
             y = ($mousePosition.y * maxY) / heightScreen;
