@@ -18,9 +18,8 @@
         const gamma = $deviceOrientation.gamma;
 
         if (gamma != null) {
-            const gammaRange = 50;
-            const restGamma = 0;
-            x = baseX + ((gamma - restGamma) / gammaRange) * (maxX - baseX);
+            const normalizedGamma = gamma / maxX;
+            x = baseX + normalizedGamma * (maxX - baseX);
         } else {
             x = ($mousePosition.x * maxX) / widthScreen;
             y = ($mousePosition.y * maxY) / heightScreen;
