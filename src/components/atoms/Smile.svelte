@@ -11,28 +11,18 @@
     const baseX = 29;
     const baseY = 49;
 
-    const betaRange = 180;
     const gammaRange = 50;
 
-    let restBeta = 0;
     const restGamma = 0;
 
     let x = baseX;
     let y = baseY;
 
     $: {
-        const beta = $deviceOrientation.beta ?? 0;
         const gamma = $deviceOrientation.gamma ?? 0;
-        let restBeta = beta;
-
-        const normalizedBeta = (beta - restBeta) / (betaRange / 2);
         const normalizedGamma = (gamma - restGamma) / gammaRange;
-
         x = baseX + normalizedGamma * (58 - baseX);
-        y = baseY - normalizedBeta * baseY;
-
         x = Math.max(0, Math.min(x, 58));
-        y = Math.max(39, Math.min(y, 59));
     }
 </script>
 
